@@ -8,13 +8,18 @@ public class Player : NetworkBehaviour {
     [SyncVar]
     public int m_team;
 
-	// Use this for initialization
-	void Start () {
-		if(isLocalPlayer)
+    [SyncVar]
+    public Color m_color;
+
+    // Use this for initialization
+    void Start () {
+        var gameCtrl = FindObjectOfType<GameController>();
+
+        if(gameCtrl)
         {
-            FindObjectOfType<GameController>().SetCurrentPlayer(this);
+            gameCtrl.AddPlayer(this);
         }
-	}
+    }
 	
 	// Update is called once per frame
 	void Update () {

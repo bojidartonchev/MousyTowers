@@ -303,6 +303,8 @@ namespace Prototype.NetworkLobby
 
                 if (p != null)
                 {
+                    Debug.Assert(p.team != Team.None, "This should not happen");
+
                     return p.team == Team.TeamA ? Team.TeamB : Team.TeamA;
                 }
             }

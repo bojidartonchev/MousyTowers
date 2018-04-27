@@ -13,6 +13,7 @@ public class NetworkLobbyHook : LobbyHook
         if(player)
         {
             player.SetTeam(lobby.team);
+            player.m_color = lobby.playerColor;
         }
     }
 }

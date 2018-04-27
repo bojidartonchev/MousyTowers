@@ -1111,7 +1111,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_limit: 0
-  m_isStartTower: 0
+  m_isStartTower: 1
+  m_startForTeam: 2
 --- !u!114 &375874857
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1391,6 +1392,7 @@ GameObject:
   m_Component:
   - component: {fileID: 717301112}
   - component: {fileID: 717301113}
+  - component: {fileID: 717301114}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -1423,6 +1425,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_tREMOVE: {fileID: 828641507}
+--- !u!114 &717301114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 717301111}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 0
+    i1: 0
+    i2: 0
+    i3: 0
+    i4: 0
+    i5: 0
+    i6: 0
+    i7: 0
+    i8: 0
+    i9: 0
+    i10: 0
+    i11: 0
+    i12: 0
+    i13: 0
+    i14: 0
+    i15: 0
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!1 &743135825
 GameObject:
   m_ObjectHideFlags: 0
@@ -2172,6 +2206,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_limit: 0
   m_isStartTower: 0
+  m_startForTeam: 0
 --- !u!114 &1218409895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2809,7 +2844,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_limit: 0
-  m_isStartTower: 0
+  m_isStartTower: 1
+  m_startForTeam: 1
 --- !u!114 &1992908559
 MonoBehaviour:
   m_ObjectHideFlags: 0
