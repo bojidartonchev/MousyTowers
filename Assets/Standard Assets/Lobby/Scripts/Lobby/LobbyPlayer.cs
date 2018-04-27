@@ -3,7 +3,12 @@ using UnityEngine.UI;
 using UnityEngine.Networking;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+
+public enum Team
+{
+    TeamA,
+    TeamB
+};
 
 namespace Prototype.NetworkLobby
 {
@@ -20,6 +25,8 @@ namespace Prototype.NetworkLobby
         public Button readyButton;
         public Button waitingPlayerButton;
         public Button removePlayerButton;
+
+        public Team team;
 
         public GameObject localIcone;
         public GameObject remoteIcone;

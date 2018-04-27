@@ -279,7 +279,7 @@ namespace Prototype.NetworkLobby
 
             LobbyPlayer newPlayer = obj.GetComponent<LobbyPlayer>();
             newPlayer.ToggleJoinButton(numPlayers + 1 >= minPlayers);
-
+            newPlayer.team = SelectTeam();
 
             for (int i = 0; i < lobbySlots.Length; ++i)
             {
@@ -293,6 +293,21 @@ namespace Prototype.NetworkLobby
             }
 
             return obj;
+        }
+
+        private Team SelectTeam()
+        {
+            for (int i = 0; i < lobbySlots.Length; ++i)
+            {
+                LobbyPlayer p = lobbySlots[i] as LobbyPlayer;
+
+                if (p != null)
+                {
+                    return p.team == Team.TeamA ? Team.TeamB : Team.TeamA;
+                }
+            }
+
+            return Team.TeamA;
         }
 
         public override void OnLobbyServerPlayerRemoved(NetworkConnection conn, short playerControllerId)
