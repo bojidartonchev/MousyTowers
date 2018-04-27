@@ -7,7 +7,7 @@ public class Unit : MonoBehaviour {
 	[HideInInspector]
 	public PathFinder pathFinder;
 
-	void Start () {
-		pathFinder = GetComponent<PathFinder> ();	
+	protected void Start () {
+		pathFinder = GetComponent<PathFinder> ();
 	}
 }

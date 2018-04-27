@@ -17,13 +17,13 @@ public class TouchController : MonoBehaviour {
 				if (Input.GetMouseButton (0)) 
 				{
 					for (int i = 0; i < Team1.transform.childCount; i++) {
-						Team1.transform.GetChild (i).GetComponent<PathFinder> ().Destination = hit.transform;
+						Team1.transform.GetChild (i).GetComponent<PathFinder> ().SetDestination(hit.transform);
 					}
 				}
 				else if (Input.GetMouseButtonDown (1))
 				{
 					for (int i = 0; i < Team1.transform.childCount; i++) {
-						Team2.transform.GetChild (i).GetComponent<PathFinder> ().Destination = hit.transform;
+						Team2.transform.GetChild (i).GetComponent<PathFinder> ().SetDestination(hit.transform);
 					}
 				}
 					
