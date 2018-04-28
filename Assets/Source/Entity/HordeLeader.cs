@@ -6,12 +6,13 @@ public class HordeLeader : Unit {
 
 	private Horde m_horde;
 
-	private void Start(){
-		base.Start ();
-		m_horde = transform.parent.GetComponent<Horde> ();
-	}
+    private new void Start()
+    {
+        base.Start();
+        m_horde = transform.parent.GetComponent<Horde>();
+    }
 
-	private void OnTriggerEnter(Collider col){
+    private void OnTriggerEnter(Collider col){
 		var hordeLeader = col.GetComponent<HordeLeader> ();
 
 		if (hordeLeader) {
@@ -20,8 +21,12 @@ public class HordeLeader : Unit {
 	}
 
 	private void NotifyHorde(HordeLeader threat){
-		m_horde.StartAttack (threat);
-	}
+
+        if(m_horde.GetTeam() != threat.GetHorde().GetTeam())
+        {
+            m_horde.StartAttack(threat);
+        } 
+    }
 
 	public Horde GetHorde()
 	{

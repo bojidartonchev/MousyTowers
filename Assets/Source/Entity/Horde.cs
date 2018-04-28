@@ -5,6 +5,8 @@ using UnityEngine.Networking;
 
 public class Horde : NetworkBehaviour {
 
+    public Team team;
+
 	private Unit[] m_units;
 	private HordeLeader m_leader;
 	private int m_liveUnits;
@@ -47,7 +49,7 @@ public class Horde : NetworkBehaviour {
 	public void StartAttack(HordeLeader attacker)
 	{
 		Horde attackingHorde = attacker.GetHorde ();
-		if (m_leader && attacker && attackingHorde) {
+		if (m_leader && attacker && attackingHorde && attackingHorde.team != team) {
 			var attackingUnit = attackingHorde.GetRandomUnit();
 			var attackPoint = (GetRandomUnit().transform.position - attackingUnit.transform.position) * 0.5f + attackingUnit.transform.position;
 			for (int i = 0; i < m_units.Length; i++) {
@@ -65,6 +67,16 @@ public class Horde : NetworkBehaviour {
 
 		return m_units [index];
 	}
+
+    public HordeLeader GetLeader()
+    {
+        return m_leader;
+    }
+
+    public Team GetTeam()
+    {
+        return team;
+    }
 
 	public int GetLiveUnits()
 	{
