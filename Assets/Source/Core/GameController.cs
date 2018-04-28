@@ -8,41 +8,159 @@ public class GameController : NetworkBehaviour {
 
     private Team m_currentTeam;
 
+    // Use getters instead
     private List<Player> m_players;
     private List<Tower> m_towers;
+
+    private static GameController _instance;
+
+    private static object _lock = new object();
+
+    public static GameController Instance
+    {
+        get
+        {
+            if (applicationIsQuitting)
+            {
+                /*
+				Debug.LogWarning ("[Singleton] Instance '" + typeof(T) +
+				"' already destroyed on application quit." +
+				" Won't create again - returning null.");
+				*/
+                return null;
+            }
+
+            lock (_lock)
+            {
+                if (_instance == null)
+                {
+                    _instance = (GameController)FindObjectOfType(typeof(GameController));
+
+                    if (FindObjectsOfType(typeof(GameController)).Length > 1)
+                    {
+                        /*
+						Debug.LogError ("[Singleton] Something went really wrong " +
+						" - there should never be more than 1 singleton!" +
+						" Reopening the scene might fix it.");
+						*/
+                        return _instance;
+                    }
+
+                    if (_instance == null)
+                    {
+                        GameObject singleton = new GameObject();
+                        _instance = singleton.AddComponent<GameController>();
+
+                        //singleton.name = "(singleton) " + typeof(T).ToString ();
+
+                        DontDestroyOnLoad(singleton);
+#if UNITY_EDITOR
+                        singleton.name = string.Format("_{0}Singleton", typeof(GameController).Name);
+#endif
+                        /*
+						Debug.Log ("[Singleton] An instance of " + typeof(T) +
+						" is needed in the scene, so '" + singleton +
+						"' was created with DontDestroyOnLoad.");
+						*/
+                    }
+                    else
+                    {
+                        /*
+						Debug.Log ("[Singleton] Using instance already created: " +
+						_instance.gameObject.name);
+						*/
+                    }
+                }
+
+                return _instance;
+            }
+        }
+    }
+
+    private static bool applicationIsQuitting = false;
+
+    /// <summary>
+    /// When Unity quits, it destroys objects in a random order.
+    /// In principle, a Singleton is only destroyed when application quits.
+    /// If any script calls Instance after it have been destroyed, 
+    ///   it will create a buggy ghost object that will stay on the Editor scene
+    ///   even after stopping playing the Application. Really bad!
+    /// So, this was made to be sure we're not creating that buggy ghost object.
+    /// </summary>
+    public void OnDestroy()
+    {
+        applicationIsQuitting = true;
+    }
+
+    public Team GetCurrentTeam()
+    {
+        if(m_currentTeam == Team.None && m_players.Count == 0)
+        {
+            //force update players
+            var pl = Players;
+        }
+
+        return m_currentTeam;
+    }
+
+    public List<Player> Players
+    {   get
+        {
+            if(m_players.Count <= 0)
+            {
+                var players = FindObjectsOfType<Player>();
+                if (players.Length > 0)
+                {
+                    foreach(var pl in players)
+                    {
+                        if(pl.isLocalPlayer)
+                        {
+                            m_currentTeam = pl.GetTeam();
+                        }
+
+                        m_players.Add(pl);
+                    }
+                }
+            }            
+
+            return m_players;
+        }
+
+        private set
+        {
+            m_players = value;
+        }
+    }
+
+    public List<Tower> Towers
+    {
+        get
+        {
+            if (m_towers.Count <= 0)
+            {
+                var towers = FindObjectsOfType<Tower>();
+                if (towers.Length > 0)
+                {
+                    m_towers.AddRange(towers);
+                }
+            }
+
+            return m_towers;
+        }
+
+        private set
+        {
+            m_towers = value;
+        }
+    }
+
 
     public GameObject m_tREMOVE;
 
     // Use this for initialization
-    void Start () {
+    void Awake () {
         m_players = new List<Player>();
-        m_towers = new List<Tower>();
-
-        var players = FindObjectsOfType<Player>();
-        if(players.Length > 0)
-        {
-            foreach (var p in players)
-            {
-                AddPlayer(p);
-            }
-        }
-
-        var towers = FindObjectsOfType<Tower>();
-        if (towers.Length > 0)
-        {
-            foreach (var t in towers)
-            {
-                AddTower(t);
-            }
-        }
-
-        if(isServer)
-        {
-            if (m_players.Count >= 2)
-            {
-                InitGame();
-            }
-        }        
+        m_towers = new List<Tower>();     
     }
 	
 	// Update is called once per frame
@@ -51,61 +169,6 @@ public class GameController : NetworkBehaviour {
         {
             m_tREMOVE.GetComponent<Text>().text = m_currentTeam.ToString();
         }
-    }
-
-    [Server]
-    public void InitGame()
-    {
-        if(isServer)
-        {
-            foreach(var pl in m_players)
-            {
-                var tower = m_towers.Find(t => t.m_isStartTower && t.m_startForTeam == pl.GetTeam());
-
-                if (tower)
-                {
-                    tower.Occupy(pl);
-                }
-            }            
-        }
-    }
-
-    public void AddPlayer(Player pl)
-    {
-        if(m_players != null)
-        {
-            bool alreadyAdded = m_players.Find(p => p.GetInstanceID() == pl.GetInstanceID()) != null;
-            if (alreadyAdded == false)
-            {
-                if (pl.isLocalPlayer)
-                {
-                    m_currentTeam = pl.GetTeam();
-                }
-
-                m_players.Add(pl);
-
-                if (isServer)
-                {
-                    if (m_players.Count >= 2)
-                    {
-                        InitGame();
-                    }
-                }
-            }
-        }        
-    }
-
-    public void AddTower(Tower t)
-    {
-        if(m_towers != null)
-        {
-            bool alreadyAdded = m_towers.Find(tw => tw.GetInstanceID() == t.GetInstanceID()) != null;
-            if (alreadyAdded == false)
-            {
-                m_towers.Add(t);
-            }
-        }
-        
     }
 
     public Player GetCurrentPlayer()
@@ -122,12 +185,19 @@ public class GameController : NetworkBehaviour {
             return player.m_color;
         }
 
-        return Color.white;
+        return Color.clear;
+    }
+
+    public Tower GetTowerByNetworkId(NetworkInstanceId id)
+    {
+        var tw = Towers.Find(t => t.netId == id);
+
+        return tw;
     }
 
     private Player GetTeamPlayer(Team p)
     {
-        var pl = m_players.Find(s => s.m_team == (int)p);
+        var pl = Players.Find(s => s.m_team == (int)p);
 
         return pl;
     }

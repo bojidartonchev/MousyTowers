@@ -13,12 +13,7 @@ public class Player : NetworkBehaviour {
 
     // Use this for initialization
     void Start () {
-        var gameCtrl = FindObjectOfType<GameController>();
 
-        if(gameCtrl)
-        {
-            gameCtrl.AddPlayer(this);
-        }
     }
 	
 	// Update is called once per frame

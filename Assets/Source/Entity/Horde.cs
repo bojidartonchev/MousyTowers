@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class Horde : MonoBehaviour {
+public class Horde : NetworkBehaviour {
 
 	private Unit[] m_units;
 	private HordeLeader m_leader;
@@ -47,7 +48,7 @@ public class Horde : MonoBehaviour {
 	{
 		Horde attackingHorde = attacker.GetHorde ();
 		if (m_leader && attacker && attackingHorde) {
-			var attackingUnit = attackingHorde.GetRandomUnit ();
+			var attackingUnit = attackingHorde.GetRandomUnit();
 			var attackPoint = (GetRandomUnit().transform.position - attackingUnit.transform.position) * 0.5f + attackingUnit.transform.position;
 			for (int i = 0; i < m_units.Length; i++) {
 				m_units [i].pathFinder.PrepareForAttack (attackPoint);

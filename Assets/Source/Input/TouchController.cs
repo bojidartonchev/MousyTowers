@@ -14,20 +14,22 @@ public class TouchController : MonoBehaviour {
 			RaycastHit hit; 
 			Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition); 
 			if ( Physics.Raycast (ray,out hit,100.0f)  && hit.transform.gameObject.tag == "Tower") {
-				if (Input.GetMouseButton (0)) 
-				{
-					for (int i = 0; i < Team1.transform.childCount; i++) {
-						Team1.transform.GetChild (i).GetComponent<PathFinder> ().SetDestination(hit.transform);
-					}
-				}
-				else if (Input.GetMouseButtonDown (1))
-				{
-					for (int i = 0; i < Team1.transform.childCount; i++) {
-						Team2.transform.GetChild (i).GetComponent<PathFinder> ().SetDestination(hit.transform);
-					}
-				}
-					
-			}
+
+                //Debug.Log(hit.transform.gameObject.GetComponent<Tower>().GetUnits());
+                if (Input.GetMouseButton (0)) 
+                {
+                	for (int i = 0; i < Team1.transform.childCount; i++) {
+                		Team1.transform.GetChild (i).GetComponent<PathFinder> ().SetDestination(hit.transform);
+                	}
+                }
+                else if (Input.GetMouseButtonDown (1))
+                {
+                	for (int i = 0; i < Team1.transform.childCount; i++) {
+                		Team2.transform.GetChild (i).GetComponent<PathFinder> ().SetDestination(hit.transform);
+                	}
+                }
+
+            }
 		}
 	}
 }
