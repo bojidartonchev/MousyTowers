@@ -50,7 +50,7 @@ public class Player : NetworkBehaviour {
 
         if (spell)
         {
-            spell.Execute(target);
+            spell.Execute(GameController.Instance.GetTeamStartTower(GetTeam()).transform.position ,target);
         }
     }
 }

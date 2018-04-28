@@ -7,10 +7,13 @@ public class SpellButton : MonoBehaviour {
     public SpellType m_type;
 
     private bool m_dragging;
+    private DragDropController m_dragDropCtrl;
 
 	// Use this for initialization
 	void Start () {
         m_dragging = false;
+
+        m_dragDropCtrl = FindObjectOfType<DragDropController>();
     }
 	
 	// Update is called once per frame
@@ -26,23 +29,16 @@ public class SpellButton : MonoBehaviour {
     public void OnPointerUp()
     {
         m_dragging = false;
-
-        if(m_type == SpellType.ClearTower || m_type == SpellType.ProtectTower)
-        {
-            var player = GameController.Instance.GetCurrentPlayer();
-
-            if(player)
-            {
-                player.CmdExecuteSpell(m_type, new Vector3()); // no target needed;
-            }
-        }
     }
 
     public void OnPointerExit()
     {
         if(m_dragging)
         {
-            // notify draging component to start draging
+            if (m_dragDropCtrl)
+            {
+                m_dragDropCtrl.StartSpellDrag(m_type);
+            }
         }
     }
 }

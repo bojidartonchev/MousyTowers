@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public enum SpellType
@@ -31,30 +32,24 @@ public class Spell : MonoBehaviour {
         return true;
     }
 
-    public void Execute(Vector3 targetCoords)
+    public void Execute(Vector3 startCoords, Vector3 targetCoords)
     {
-        var mainTower = GameController.Instance.GetMyStartTower();
-
-        if(mainTower)
+        var projectile = Instantiate(m_spellEffect);
+        if (m_type == SpellType.ClearTower || m_type == SpellType.ProtectTower)
         {
-            var projectile = Instantiate(m_spellEffect);
+            projectile.transform.position = new Vector3(targetCoords.x, 0f, targetCoords.z);
+        }
+        else
+        {
+            projectile.transform.position = startCoords;
+        }
 
-            if(m_type == SpellType.ClearTower || m_type == SpellType.ProtectTower)
+        if (m_type == SpellType.FreezeTarget)
+        {
+            for (int i = 0; i < projectile.transform.childCount; i++)
             {
-                projectile.transform.position = new Vector3(mainTower.transform.position.x, 0f, mainTower.transform.position.z);
-            }
-            else
-            {
-                projectile.transform.position = mainTower.transform.position;
-            }
-            
-            if(m_type == SpellType.FreezeTarget)
-            {
-                projectile.gameObject.transform.LookAt(targetCoords);
-            }           
-
-            // getProjectile script and send to tower.
-            // if on server, detect colision and notify clients
+                projectile.gameObject.transform.GetChild(i).LookAt(targetCoords);
+            }            
         }
     }
 }

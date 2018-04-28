@@ -11,6 +11,11 @@ public class DragDropController : MonoBehaviour
     Vector3 offsetValue;
     Vector3 positionOfScreen;
 
+    bool isDragingSpell;
+    SpellType spellType;
+
+    public MeshRenderer m_groundRenderer;
+
     // Use this for initialization
     void Start()
     {
@@ -42,34 +47,120 @@ public class DragDropController : MonoBehaviour
         {
             isMouseDragging = false;
 
+            // remove ground circle
+            m_groundRenderer.material.SetFloat("_Radius", 0f);
+            m_groundRenderer.material.SetFloat("_Border", 0f);
+
             RaycastHit hitInfo;
             m_target = ReturnClickedObject(out hitInfo);
-            if (m_target != null && m_target.tag == "Tower")
-            {
-                var targetTower = m_target.GetComponent<Tower>();
-                var sourceTower = m_source.GetComponent<Tower>();
 
-                if(targetTower && sourceTower && targetTower!=sourceTower)
+            if (isDragingSpell)
+            {
+                Vector3 targetPoss = new Vector3();
+
+                if(spellType == SpellType.ClearTower || spellType == SpellType.ProtectTower)
                 {
-                    sourceTower.MoveUnits(targetTower);
+                    if (m_target != null && m_target.tag == "Tower")
+                    {
+                        var targetTower = m_target.GetComponent<Tower>();
+
+                        if (!targetTower || !(targetTower.m_occupator == GameController.Instance.GetCurrentTeam()))
+                        {
+                            return;
+                        }
+
+                        targetPoss = targetTower.gameObject.transform.position;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                else
+                {
+                    targetPoss = hitInfo.point;
+                }
+
+                isDragingSpell = false;
+
+                // lauchn spell
+                var player = GameController.Instance.GetCurrentPlayer();
+                if (player)
+                {
+                    player.CmdExecuteSpell(spellType, targetPoss);
                 }
             }
+            else
+            {
+                if (m_target != null && m_target.tag == "Tower")
+                {
+                    var targetTower = m_target.GetComponent<Tower>();
+                    var sourceTower = m_source.GetComponent<Tower>();
+
+                    if (targetTower && sourceTower && targetTower != sourceTower)
+                    {
+                        sourceTower.MoveUnits(targetTower);
+                    }
+                }
+            }            
         }
 
         //Is mouse Moving
         if (isMouseDragging)
         {
-            //tracking mouse position.
-            Vector3 currentScreenSpace = new Vector3(Input.mousePosition.x, Input.mousePosition.y, positionOfScreen.z);
+            RaycastHit hitInfo;
+            var tempTarget = ReturnClickedObject(out hitInfo);
 
-            //converting screen position to world position with offset changes.
-            Vector3 currentPosition = Camera.main.ScreenToWorldPoint(currentScreenSpace) + offsetValue;
+            var color = Color.red;            
 
-            //It will update target gameobject's current postion.
-            //getTarget.transform.position = currentPosition;
+            if (isDragingSpell)
+            {
+                if(spellType == SpellType.ClearTower || spellType == SpellType.ProtectTower)
+                {
+                    // make circle green if acceptable target selected
+                    if (tempTarget != null && tempTarget.tag == "Tower")
+                    {
+                        var sourceTower = tempTarget.GetComponent<Tower>();
+                        if (sourceTower && sourceTower.m_occupator == GameController.Instance.GetCurrentTeam())
+                        {
+                            // make green
+                            color = Color.green;
+                        }
+                    }
+                }
+                else
+                {
+                    color = Color.green;
+                }                
+            }
+            else
+            {
+                // draging units
+
+                // make circle green if acceptable target selected
+                if (tempTarget != null && tempTarget.tag == "Tower")
+                {
+                    var tower = tempTarget.GetComponent<Tower>();
+                    if (tower)
+                    {
+                        // make green
+                        color = Color.green;
+                    }
+                }
+            }
+
+            m_groundRenderer.material.SetColor("_AreaColor", color);
+            m_groundRenderer.material.SetVector("_Center", hitInfo.point);
+            m_groundRenderer.material.SetFloat("_Radius", 3f);
+            m_groundRenderer.material.SetFloat("_Border", 2f);
         }
+    }
 
-
+    public void StartSpellDrag(SpellType t)
+    {
+        isMouseDragging = true;
+        isDragingSpell = true;
+        spellType = t;
     }
 
     //Method to Return Clicked Object
