@@ -333,7 +333,7 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 113123024}
-  m_LocalRotation: {x: -0, y: -0.38108218, z: -0, w: 0.9245411}
+  m_LocalRotation: {x: -0, y: -0.3810822, z: -0, w: 0.9245412}
   m_LocalPosition: {x: 1.14, y: 0, z: -1.871}
   m_LocalScale: {x: 2.7377925, y: 0.004530217, z: 0.36419055}
   m_Children: []
@@ -666,12 +666,13 @@ GameObject:
   - component: {fileID: 375874853}
   - component: {fileID: 375874852}
   - component: {fileID: 375874855}
+  - component: {fileID: 375874856}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!23 &375874852
 MeshRenderer:
@@ -739,6 +740,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!208 &375874856
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 375874851}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &433482794
 GameObject:
   m_ObjectHideFlags: 0
@@ -2589,12 +2605,13 @@ GameObject:
   - component: {fileID: 1992908555}
   - component: {fileID: 1992908554}
   - component: {fileID: 1992908557}
+  - component: {fileID: 1992908558}
   m_Layer: 0
   m_Name: Tower (2)
   m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!23 &1992908554
 MeshRenderer:
@@ -2662,6 +2679,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!208 &1992908558
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1992908553}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &2021453006
 GameObject:
   m_ObjectHideFlags: 0

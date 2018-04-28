@@ -125,6 +125,8 @@ public class Tower : NetworkBehaviour {
             // Istantiate prefabs from server
             var hordeInstance = Instantiate(m_HordePrefab);
             hordeInstance.transform.position = m_SpawnPoss.transform.position;
+            var horde = hordeInstance.GetComponent<Horde>();
+            horde.team = m_occupator; 
             NetworkServer.Spawn(hordeInstance);
 
             var hordeLeaderInstance = Instantiate(m_HordeLeaderPrefab);
