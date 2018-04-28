@@ -15,7 +15,11 @@ public class PathFinder : MonoBehaviour {
 
 
 	public void SetDestination(Transform destination){
-		if(destination && (m_agent && m_agent.destination != destination.position))
+        if(!m_agent)
+        {
+            m_agent = GetComponent<NavMeshAgent>();
+        }
+		if(destination && (m_agent))
 		{
 			m_agent.SetDestination(destination.position);
 		}

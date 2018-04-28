@@ -53,8 +53,6 @@ public class Tower : NetworkBehaviour {
 
                         //Spawn the GameObject you assign in the Inspector
                         NetworkServer.Spawn(hordeUnit);
-
-                        hordeUnit.GetComponent<PathFinder>().SetDestination(this.transform);
                     }
                 }
                 tickPeriod += UnityEngine.Time.deltaTime;
@@ -129,9 +127,7 @@ public class Tower : NetworkBehaviour {
             horde.team = m_occupator; 
             NetworkServer.Spawn(hordeInstance);
 
-            var hordeLeaderInstance = Instantiate(m_HordeLeaderPrefab);
-            hordeLeaderInstance.transform.position = m_SpawnPoss.transform.position;
-            hordeLeaderInstance.transform.parent = hordeInstance.transform;
+            var hordeLeaderInstance = Instantiate(m_HordeLeaderPrefab, m_SpawnPoss.transform);
             hordeLeaderInstance.GetComponent<HordeLeader>().parentNetId = hordeInstance.GetComponent<Horde>().netId;
             NetworkServer.Spawn(hordeLeaderInstance);
 
@@ -154,7 +150,6 @@ public class Tower : NetworkBehaviour {
                 children[i].parentNetId = hordeInstance.GetComponent<Horde>().netId;
                 children[i].transform.parent = hordeInstance.transform;
             }
-
             for (int i = 0; i < hordeInstance.transform.childCount; i++)
             {
                 hordeInstance.transform.GetChild(i).GetComponent<PathFinder>().SetDestination(target.transform);

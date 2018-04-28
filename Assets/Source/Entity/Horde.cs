@@ -68,6 +68,16 @@ public class Horde : NetworkBehaviour {
 		return m_units [index];
 	}
 
+    public HordeLeader GetLeader()
+    {
+        return m_leader;
+    }
+
+    public Team GetTeam()
+    {
+        return team;
+    }
+
 	public int GetLiveUnits()
 	{
 		return m_liveUnits;

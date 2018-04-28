@@ -21,8 +21,12 @@ public class HordeLeader : Unit {
 	}
 
 	private void NotifyHorde(HordeLeader threat){
-		m_horde.StartAttack (threat);
-	}
+
+        if(m_horde.GetTeam() != threat.GetHorde().GetTeam())
+        {
+            m_horde.StartAttack(threat);
+        } 
+    }
 
 	public Horde GetHorde()
 	{
