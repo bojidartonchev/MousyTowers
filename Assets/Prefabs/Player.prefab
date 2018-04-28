@@ -84,3 +84,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7973873e6d4bb24fbfa779fedcf8d1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_team: 0
+  m_color: {r: 0, g: 0, b: 0, a: 0}
+  m_spells:
+  - {fileID: 114927705530557176, guid: 0044ed64d9332224ca1ec00fb4a3df5a, type: 2}
+  - {fileID: 114601893167443710, guid: 3630eba7e82a24348a2c6170271b208a, type: 2}
+  - {fileID: 114528915622850014, guid: 6e4f2aec0862b524292de123b28afa1a, type: 2}

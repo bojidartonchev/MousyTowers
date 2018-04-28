@@ -17,3 +17,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Bojo Test/NavMeshTestScene.unity
     guid: c67a2d2536ace5c43b24f1cd3af7b5a6
+  - enabled: 1
+    path: Assets/Scenes/UI/HudMenu.unity
+    guid: a0206e68ac510c8419b0fe2929d0a751

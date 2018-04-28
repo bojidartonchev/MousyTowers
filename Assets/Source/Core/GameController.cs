@@ -106,8 +106,10 @@ public class GameController : NetworkBehaviour {
     public List<Player> Players
     {   get
         {
-            if(m_players.Count <= 0)
+            if(m_players.Count <= 1)
             {
+                m_players = new List<Player>();
+
                 var players = FindObjectsOfType<Player>();
                 if (players.Length > 0)
                 {
@@ -195,9 +197,21 @@ public class GameController : NetworkBehaviour {
         return tw;
     }
 
+    public Tower GetTeamStartTower(Team team)
+    {
+        var tw = Towers.Find(t => t.m_occupator == team && t.m_isStartTower);
+
+        return tw;
+    }
+
+    public Tower GetMyStartTower()
+    {
+        return GetTeamStartTower(m_currentTeam);
+    }
+
     private Player GetTeamPlayer(Team p)
     {
-        var pl = Players.Find(s => s.m_team == (int)p);
+        var pl = Players.Find(s => s.m_team == (int)(p == Team.None ? m_currentTeam : p));
 
         return pl;
     }
