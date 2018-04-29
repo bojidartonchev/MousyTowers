@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 4896248962192724}
   - component: {fileID: 33994820087115836}
   - component: {fileID: 23378122223051362}
+  - component: {fileID: 208079840083697494}
   m_Layer: 8
   m_Name: Volume4
   m_TagString: Untagged
@@ -46,6 +47,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1300078388046476
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4410411534150690}
+  m_Layer: 8
+  m_Name: SpawnPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!4 &4077744129793448
 Transform:
   m_ObjectHideFlags: 1
@@ -57,8 +73,22 @@ Transform:
   m_LocalScale: {x: 0.042341087, y: 0.042341087, z: 0.042341087}
   m_Children:
   - {fileID: 4896248962192724}
+  - {fileID: 4410411534150690}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4410411534150690
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1300078388046476}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -110.8, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4077744129793448}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4896248962192724
 Transform:
@@ -136,6 +166,7 @@ MonoBehaviour:
     type: 2}
   m_selfEffectSpawnPossition: {fileID: 1154665560768412}
   m_targetEffectSpawnPossition: {fileID: 1103327615046952}
+  m_unitSpawnPossition: {fileID: 1300078388046476}
 --- !u!114 &114874387390416120
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -181,3 +212,18 @@ CapsuleCollider:
   m_Height: 302.8
   m_Direction: 1
   m_Center: {x: 0, y: 114.1, z: 0}
+--- !u!208 &208079840083697494
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1103327615046952}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 73.837006, y: 151.957, z: 73.828}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -3.5690002, y: 112.02801, z: 3.8780003}
+  m_TimeToStationary: 0.5

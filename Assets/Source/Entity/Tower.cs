@@ -16,14 +16,21 @@ public class Tower : NetworkBehaviour {
 
     public GameObject m_selfEffectSpawnPossition;
     public GameObject m_targetEffectSpawnPossition;
+    public GameObject m_unitSpawnPossition;
 
     private float tickPeriod = 0.0f;
 
     [SyncVar]
     private int m_units;
 
-    [SyncVar(hook = "OnColorChange")]
-    private Color m_color = Color.clear;
+    private float m_occupyTime = 5f;
+    private float m_lastOccupationStart;
+
+    private bool m_isATeamPresent;
+    private bool m_isBTeamPresent;
+    private bool m_isBeingOccupied;
+
+    private Dictionary<HordeLeader, Unit[]> m_availableUnits = new Dictionary<HordeLeader, Unit[]>();
 
     // Use this for initialization
     void Start () {
@@ -33,21 +40,46 @@ public class Tower : NetworkBehaviour {
     // Update is called once per frame
     void Update()
     {
-        if(isServer)
+        if (isServer)
         {
-            if (IsOccupied())
+            CheckPresence();
+
+            if ((m_isBTeamPresent || m_isATeamPresent) && m_isBeingOccupied == false)
+            {
+                m_isBeingOccupied = true;
+                m_lastOccupationStart = Time.time;
+            }
+
+            if (m_isBTeamPresent && m_isATeamPresent && m_isBeingOccupied)
+            {
+                m_isBeingOccupied = false;
+            }
+
+            if (m_isBeingOccupied && m_lastOccupationStart + m_occupyTime > Time.time)
+            {
+                if (m_isATeamPresent)
+                {
+                    Occupy((Team)0);
+                }
+                else if (m_isBTeamPresent)
+                {
+                    Occupy((Team)1);
+                }
+            }
+
+            if (IsOccupied() && m_isBeingOccupied == false)
             {
                 if (tickPeriod > 1)
                 {
                     //Do Stuff
                     tickPeriod = 0;
 
-                    if(m_units < m_limit)
+                    if (m_units < m_limit)
                     {
                         m_units++;
 
                         // Istantiate prefabs from server
-                        var hordeUnit = Instantiate(m_HordeUnitPrefab);
+                        var hordeUnit = Instantiate(m_HordeUnitPrefab, m_unitSpawnPossition.transform.position, m_unitSpawnPossition.transform.rotation);
 
                         // Assign parrent
                         hordeUnit.GetComponent<Unit>().parentNetId = this.netId;
@@ -61,17 +93,9 @@ public class Tower : NetworkBehaviour {
         }
         else
         {
-            if (m_color == Color.clear)
-            {
-                var c = GameController.Instance.GetTeamColor(m_occupator);
-
-                if (c != Color.clear)
-                {
-                    OnColorChange(c);
-                }
-            }
-        }        
+        }
     }
+
 
     public bool IsOccupied()
     {
@@ -79,14 +103,13 @@ public class Tower : NetworkBehaviour {
     }
 
     [Server]
-    public void Occupy(Player p)
+    public void Occupy(Team team)
     {
         if(IsOccupied() == false)
         {
-            m_occupator = p.GetTeam();
-            m_color = p.m_color;
+            m_occupator = team;
 
-            RpcOnOccupy((int)p.m_team);
+            RpcOnOccupy((int)team);
         }
     }
 
@@ -110,6 +133,21 @@ public class Tower : NetworkBehaviour {
         return m_units;
     }
 
+    private void CheckPresence()
+    {
+        foreach (var kvp in m_availableUnits)
+        {
+            if (kvp.Key.GetHorde().GetTeam() == (Team)0)
+            {
+                m_isATeamPresent = true;
+            }
+            else if (kvp.Key.GetHorde().GetTeam() == (Team)1)
+            {
+                m_isBTeamPresent = true;
+            }
+        }
+    }
+
     // CMDs
     [Command]
     private void CmdInitMoveUnits(NetworkInstanceId targetId)
@@ -128,7 +166,7 @@ public class Tower : NetworkBehaviour {
             horde.team = m_occupator; 
             NetworkServer.Spawn(hordeInstance);
 
-            var hordeLeaderInstance = Instantiate(m_HordeLeaderPrefab, transform);
+            var hordeLeaderInstance = Instantiate(m_HordeLeaderPrefab, m_unitSpawnPossition.transform.position, m_unitSpawnPossition.transform.rotation);
             hordeLeaderInstance.GetComponent<HordeLeader>().parentNetId = hordeInstance.GetComponent<Horde>().netId;
             NetworkServer.Spawn(hordeLeaderInstance);
 
@@ -161,19 +199,41 @@ public class Tower : NetworkBehaviour {
     [ClientRpc]
     private void RpcOnOccupy(int team)
     {
-        //var gc = GameController.Instance;
-        //
-        //var materialColored = new Material(Shader.Find("Diffuse"));
-        //materialColored.color = gc.GetTeamColor((Team)team);
-        //this.GetComponent<Renderer>().material = materialColored;
-    }
-
-    private void OnColorChange(Color newColor)
-    {
-        m_color = newColor;
+        var gc = GameController.Instance;
 
         var materialColored = new Material(Shader.Find("Diffuse"));
-        materialColored.color = m_color;
-        this.GetComponent<Renderer>().material = materialColored;
+        materialColored.color = gc.GetTeamColor((Team)team);
+        this.GetComponentInChildren<Renderer>().material = materialColored;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Leader"))
+        {
+            var leader = other.gameObject.GetComponent<HordeLeader>();
+            leader.GetHorde().transform.parent = this.transform;
+            if (leader)
+            {
+                if (!m_availableUnits.ContainsKey(leader))
+                {
+                    m_availableUnits.Add(leader, leader.GetHorde().GetUnits());
+                }
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Leader"))
+        {
+            var leader = other.gameObject.GetComponent<HordeLeader>();
+            if (leader)
+            {
+                if (m_availableUnits.ContainsKey(leader))
+                {
+                    m_availableUnits.Remove(leader);
+                }
+            }
+        }
     }
 }

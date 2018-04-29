@@ -54,7 +54,17 @@ public class Spell : MonoBehaviour {
             for (int i = 0; i < m_projectile.transform.childCount; i++)
             {
                 m_projectile.gameObject.transform.GetChild(i).LookAt(targetCoords);
-            }            
+            }
+
+            Collider[] hits = Physics.OverlapSphere(targetCoords, 3.5f);
+            for (int i = 0; i < hits.Length; i++)
+            {
+                if (hits[i].CompareTag("Unit") || hits[i].CompareTag("Leader"))
+                {
+                    Destroy(hits[i].gameObject);
+                }
+            }
+                       
         }
 
         System.DateTime epochStart = new System.DateTime(1970, 1, 1, 0, 0, 0, System.DateTimeKind.Utc);
