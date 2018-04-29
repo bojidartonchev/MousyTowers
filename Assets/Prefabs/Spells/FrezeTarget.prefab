@@ -52,5 +52,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_type: 2
-  m_cooldown: 0
+  m_cooldown: 20
+  m_duration: 10
   m_spellEffect: {fileID: 166174, guid: fa7e29a7d3b562c45bc27f66db67d13b, type: 2}

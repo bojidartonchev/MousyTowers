@@ -9,14 +9,8 @@ EditorBuildSettings:
     path: Assets/Scenes/Lobby.unity
     guid: 3c0d76c55eed6214f9d3b070caede5d3
   - enabled: 1
-    path: Assets/Scenes/Game.unity
-    guid: 1bc76299f9b658942b6aa524e503f776
-  - enabled: 1
-    path: Assets/Scenes/MultiplayerGame.unity
-    guid: 827865b596462614a8a4ce0a0203600f
-  - enabled: 1
-    path: Assets/Scenes/Bojo Test/NavMeshTestScene.unity
-    guid: c67a2d2536ace5c43b24f1cd3af7b5a6
-  - enabled: 1
     path: Assets/Scenes/UI/HudMenu.unity
     guid: a0206e68ac510c8419b0fe2929d0a751
+  - enabled: 1
+    path: Assets/Scenes/FinalLevel.unity
+    guid: 468e0665daf01dc41b71d575df5d2564

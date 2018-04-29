@@ -14,7 +14,8 @@ public class Tower : NetworkBehaviour {
     public GameObject m_HordeLeaderPrefab;
     public GameObject m_HordeUnitPrefab;
 
-    public GameObject m_SpawnPoss;
+    public GameObject m_selfEffectSpawnPossition;
+    public GameObject m_targetEffectSpawnPossition;
 
     private float tickPeriod = 0.0f;
 
@@ -46,7 +47,7 @@ public class Tower : NetworkBehaviour {
                         m_units++;
 
                         // Istantiate prefabs from server
-                        var hordeUnit = Instantiate(m_HordeUnitPrefab, m_SpawnPoss.transform);
+                        var hordeUnit = Instantiate(m_HordeUnitPrefab);
 
                         // Assign parrent
                         hordeUnit.GetComponent<Unit>().parentNetId = this.netId;
@@ -122,12 +123,12 @@ public class Tower : NetworkBehaviour {
 
             // Istantiate prefabs from server
             var hordeInstance = Instantiate(m_HordePrefab);
-            hordeInstance.transform.position = m_SpawnPoss.transform.position;
+            hordeInstance.transform.position = transform.position;
             var horde = hordeInstance.GetComponent<Horde>();
             horde.team = m_occupator; 
             NetworkServer.Spawn(hordeInstance);
 
-            var hordeLeaderInstance = Instantiate(m_HordeLeaderPrefab, m_SpawnPoss.transform);
+            var hordeLeaderInstance = Instantiate(m_HordeLeaderPrefab, transform);
             hordeLeaderInstance.GetComponent<HordeLeader>().parentNetId = hordeInstance.GetComponent<Horde>().netId;
             NetworkServer.Spawn(hordeLeaderInstance);
 

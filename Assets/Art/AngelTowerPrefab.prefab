@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 33701507078647332}
   - component: {fileID: 23047186196142484}
   - component: {fileID: 114345171109030808}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -37,7 +37,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4741344487037014}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GemFloating (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -55,7 +55,7 @@ GameObject:
   - component: {fileID: 33825395510795620}
   - component: {fileID: 23861068729559400}
   - component: {fileID: 114499594193792780}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +74,7 @@ GameObject:
   - component: {fileID: 199671732459128128}
   - component: {fileID: 114792981497916404}
   - component: {fileID: 114399798882164686}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Steam (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: 199031466406253070}
   - component: {fileID: 114856751345800822}
   - component: {fileID: 114308195150450798}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Steam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 33648484935369636}
   - component: {fileID: 23583152750633048}
   - component: {fileID: 114978976084132642}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4029098189294986}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GemFloating (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -145,7 +145,7 @@ GameObject:
   - component: {fileID: 199954557291974388}
   - component: {fileID: 114289812479977894}
   - component: {fileID: 114622984015722854}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SteamMobile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -160,7 +160,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4416137041582044}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GemFloating (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -175,7 +175,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4573205699465988}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GemFloating (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -190,7 +190,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4573017908015186}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GemFloating
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205,7 +205,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4283974497793260}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GemFloating (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -223,7 +223,7 @@ GameObject:
   - component: {fileID: 33870544623383076}
   - component: {fileID: 23587496054760932}
   - component: {fileID: 114067599261764910}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -239,7 +239,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4915968064901800}
   - component: {fileID: 114326845014636050}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FloatingGemsParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -257,7 +257,7 @@ GameObject:
   - component: {fileID: 33459700245436634}
   - component: {fileID: 23646984275088950}
   - component: {fileID: 114466413070467998}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -272,7 +272,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4433008444771484}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GemFloating (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -287,9 +287,12 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4750039826013530}
-  m_Layer: 0
+  - component: {fileID: 114166885501292110}
+  - component: {fileID: 114817765648809444}
+  - component: {fileID: 136341227578643016}
+  m_Layer: 8
   m_Name: AngelTowerPrefab
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -302,7 +305,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4023165113776670}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GemFloating (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -320,7 +323,7 @@ GameObject:
   - component: {fileID: 33386429071966650}
   - component: {fileID: 23044059621215320}
   - component: {fileID: 114391249865972018}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -335,7 +338,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4421662283075288}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: AngelTower01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -352,7 +355,7 @@ GameObject:
   - component: {fileID: 4324583626319084}
   - component: {fileID: 33665605872808572}
   - component: {fileID: 23989398092511970}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Tiberium.000_Cylinder.021
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -370,7 +373,7 @@ GameObject:
   - component: {fileID: 33855436609945706}
   - component: {fileID: 23231156438542656}
   - component: {fileID: 114943046748752502}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -388,7 +391,7 @@ GameObject:
   - component: {fileID: 33536572981849532}
   - component: {fileID: 23620841028940742}
   - component: {fileID: 114778407355499064}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: default
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -657,8 +660,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1773273501818588}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -28.75, y: 10.04, z: -13.62}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -20.309998, y: -1.1499996, z: 45.67}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children:
   - {fileID: 4915968064901800}
@@ -1103,6 +1106,38 @@ MonoBehaviour:
     value: {x: 0, y: 15, z: 0}
     space: 1
   ignoreTimescale: 0
+--- !u!114 &114166885501292110
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1773273501818588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 48
+    i1: 222
+    i2: 105
+    i3: 75
+    i4: 160
+    i5: 20
+    i6: 87
+    i7: 196
+    i8: 185
+    i9: 10
+    i10: 61
+    i11: 62
+    i12: 81
+    i13: 85
+    i14: 41
+    i15: 203
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
 --- !u!114 &114289812479977894
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1273,6 +1308,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   minDuration: 8
   maxDuration: 10
+--- !u!114 &114817765648809444
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1773273501818588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 917e0ca029bfb5c4a86eab6e689f5de4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_limit: 200
+  m_isStartTower: 1
+  m_occupator: 1
+  m_HordePrefab: {fileID: 1205523589438896, guid: d3bb37e02e8ba0044bfa0b6ff9b7fd61,
+    type: 2}
+  m_HordeLeaderPrefab: {fileID: 1145031739843670, guid: e6816ac5ff47bee4f9849dfa92e5497d,
+    type: 2}
+  m_HordeUnitPrefab: {fileID: 1749741923649380, guid: 5be744eeed8158444b0358d5f5db68e3,
+    type: 2}
+  m_selfEffectSpawnPossition: {fileID: 1060450577917114}
+  m_targetEffectSpawnPossition: {fileID: 1186438358906828}
 --- !u!114 &114856751345800822
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1322,6 +1379,19 @@ MonoBehaviour:
     value: {x: 0, y: 15, z: 0}
     space: 1
   ignoreTimescale: 0
+--- !u!136 &136341227578643016
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1773273501818588}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 11.9
+  m_Height: 55.18
+  m_Direction: 1
+  m_Center: {x: 0.6, y: 17.6, z: -2.07}
 --- !u!198 &198214967634952588
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -1382,7 +1452,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
-  randomSeed: -1576984730
+  randomSeed: -2074951807
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -1739,11 +1809,11 @@ ParticleSystem:
     m_Rotation: {x: 0, y: 0, z: 0}
     m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
-    m_MeshMaterialIndex: 0
-    m_MeshNormalOffset: 0
     m_Mesh: {fileID: 0}
     m_MeshRenderer: {fileID: 0}
     m_SkinnedMeshRenderer: {fileID: 0}
+    m_MeshMaterialIndex: 0
+    m_MeshNormalOffset: 0
     m_UseMeshMaterialIndex: 0
     m_UseMeshColors: 1
     alignToDirection: 1
@@ -2417,47 +2487,6 @@ ParticleSystem:
         - serializedVersion: 2
           time: 0
           value: -1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-    speedModifier:
-      serializedVersion: 2
-      minMaxState: 0
-      scalar: 1
-      minScalar: 1
-      maxCurve:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 2
-          time: 0
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-        - serializedVersion: 2
-          time: 1
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      minCurve:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 2
-          time: 0
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-        - serializedVersion: 2
-          time: 1
-          value: 1
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -3855,7 +3884,6 @@ ParticleSystem:
     maxLights: 20
   TrailModule:
     enabled: 0
-    mode: 0
     ratio: 1
     lifetime:
       serializedVersion: 2
@@ -3900,14 +3928,12 @@ ParticleSystem:
         m_RotationOrder: 4
     minVertexDistance: 0.2
     textureMode: 0
-    ribbonCount: 1
     worldSpace: 0
     dieWithParticles: 1
     sizeAffectsWidth: 1
     sizeAffectsLifetime: 0
     inheritParticleColor: 1
     generateLightingData: 0
-    splitSubEmitterRibbons: 0
     colorOverLifetime:
       serializedVersion: 2
       minMaxState: 0
@@ -4605,7 +4631,7 @@ ParticleSystem:
   moveWithTransform: 1
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 0
-  randomSeed: 1582539145
+  randomSeed: -823186775
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -4962,11 +4988,11 @@ ParticleSystem:
     m_Rotation: {x: 0, y: 0, z: 0}
     m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
-    m_MeshMaterialIndex: 0
-    m_MeshNormalOffset: 0
     m_Mesh: {fileID: 0}
     m_MeshRenderer: {fileID: 0}
     m_SkinnedMeshRenderer: {fileID: 0}
+    m_MeshMaterialIndex: 0
+    m_MeshNormalOffset: 0
     m_UseMeshMaterialIndex: 0
     m_UseMeshColors: 1
     alignToDirection: 0
@@ -5676,47 +5702,6 @@ ParticleSystem:
         - serializedVersion: 2
           time: 1
           value: 0
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-    speedModifier:
-      serializedVersion: 2
-      minMaxState: 0
-      scalar: 1
-      minScalar: 1
-      maxCurve:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 2
-          time: 0
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-        - serializedVersion: 2
-          time: 1
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      minCurve:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 2
-          time: 0
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-        - serializedVersion: 2
-          time: 1
-          value: 1
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -7114,7 +7099,6 @@ ParticleSystem:
     maxLights: 20
   TrailModule:
     enabled: 0
-    mode: 0
     ratio: 1
     lifetime:
       serializedVersion: 2
@@ -7159,14 +7143,12 @@ ParticleSystem:
         m_RotationOrder: 4
     minVertexDistance: 0.2
     textureMode: 0
-    ribbonCount: 1
     worldSpace: 0
     dieWithParticles: 1
     sizeAffectsWidth: 1
     sizeAffectsLifetime: 0
     inheritParticleColor: 1
     generateLightingData: 0
-    splitSubEmitterRibbons: 0
     colorOverLifetime:
       serializedVersion: 2
       minMaxState: 0
@@ -8221,11 +8203,11 @@ ParticleSystem:
     m_Rotation: {x: 0, y: 0, z: 0}
     m_Scale: {x: 1, y: 1, z: 1}
     placementMode: 0
-    m_MeshMaterialIndex: 0
-    m_MeshNormalOffset: 0
     m_Mesh: {fileID: 0}
     m_MeshRenderer: {fileID: 0}
     m_SkinnedMeshRenderer: {fileID: 0}
+    m_MeshMaterialIndex: 0
+    m_MeshNormalOffset: 0
     m_UseMeshMaterialIndex: 0
     m_UseMeshColors: 1
     alignToDirection: 0
@@ -8899,47 +8881,6 @@ ParticleSystem:
         - serializedVersion: 2
           time: 0
           value: -1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-    speedModifier:
-      serializedVersion: 2
-      minMaxState: 0
-      scalar: 1
-      minScalar: 1
-      maxCurve:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 2
-          time: 0
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-        - serializedVersion: 2
-          time: 1
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-        m_PreInfinity: 2
-        m_PostInfinity: 2
-        m_RotationOrder: 4
-      minCurve:
-        serializedVersion: 2
-        m_Curve:
-        - serializedVersion: 2
-          time: 0
-          value: 1
-          inSlope: 0
-          outSlope: 0
-          tangentMode: 0
-        - serializedVersion: 2
-          time: 1
-          value: 1
           inSlope: 0
           outSlope: 0
           tangentMode: 0
@@ -10337,7 +10278,6 @@ ParticleSystem:
     maxLights: 20
   TrailModule:
     enabled: 0
-    mode: 0
     ratio: 1
     lifetime:
       serializedVersion: 2
@@ -10382,14 +10322,12 @@ ParticleSystem:
         m_RotationOrder: 4
     minVertexDistance: 0.2
     textureMode: 0
-    ribbonCount: 1
     worldSpace: 0
     dieWithParticles: 1
     sizeAffectsWidth: 1
     sizeAffectsLifetime: 0
     inheritParticleColor: 1
     generateLightingData: 0
-    splitSubEmitterRibbons: 0
     colorOverLifetime:
       serializedVersion: 2
       minMaxState: 0

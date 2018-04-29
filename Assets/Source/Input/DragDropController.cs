@@ -14,7 +14,8 @@ public class DragDropController : MonoBehaviour
     bool isDragingSpell;
     SpellType spellType;
 
-    public MeshRenderer m_groundRenderer;
+    public GameObject m_projector;
+    public Material m_projectorMat;
 
     // Use this for initialization
     void Start()
@@ -28,7 +29,7 @@ public class DragDropController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hitInfo;
-            m_source = ReturnClickedObject(out hitInfo);
+            m_source = ReturnClickedObject(out hitInfo, false);
             if (m_source != null && m_source.tag == "Tower")
             {
                 var sourceTower = m_source.GetComponent<Tower>();
@@ -48,11 +49,15 @@ public class DragDropController : MonoBehaviour
             isMouseDragging = false;
 
             // remove ground circle
-            m_groundRenderer.material.SetFloat("_Radius", 0f);
-            m_groundRenderer.material.SetFloat("_Border", 0f);
+            //m_groundRenderer.material.SetFloat("_Radius", 0f);
+            //m_groundRenderer.material.SetFloat("_Border", 0f);
+            if(m_projector)
+            {
+                m_projector.SetActive(false);
+            }
 
             RaycastHit hitInfo;
-            m_target = ReturnClickedObject(out hitInfo);
+            m_target = ReturnClickedObject(out hitInfo, false);
 
             if (isDragingSpell)
             {
@@ -69,7 +74,7 @@ public class DragDropController : MonoBehaviour
                             return;
                         }
 
-                        targetPoss = targetTower.gameObject.transform.position;
+                        targetPoss = targetTower.m_selfEffectSpawnPossition.transform.position;
                     }
                     else
                     {
@@ -108,8 +113,11 @@ public class DragDropController : MonoBehaviour
         //Is mouse Moving
         if (isMouseDragging)
         {
+            RaycastHit projectorHitInfo;
+            ReturnClickedObject(out projectorHitInfo, true);
+
             RaycastHit hitInfo;
-            var tempTarget = ReturnClickedObject(out hitInfo);
+            var tempTarget = ReturnClickedObject(out hitInfo, false);
 
             var color = Color.red;            
 
@@ -149,10 +157,12 @@ public class DragDropController : MonoBehaviour
                 }
             }
 
-            m_groundRenderer.material.SetColor("_AreaColor", color);
-            m_groundRenderer.material.SetVector("_Center", hitInfo.point);
-            m_groundRenderer.material.SetFloat("_Radius", 3f);
-            m_groundRenderer.material.SetFloat("_Border", 2f);
+            if (m_projector)
+            {
+                m_projector.SetActive(true);
+                m_projector.transform.position = new Vector3(projectorHitInfo.point.x, m_projector.transform.position.y, projectorHitInfo.point.z);
+                m_projectorMat.SetColor("_Color", color);
+            }
         }
     }
 
@@ -164,14 +174,26 @@ public class DragDropController : MonoBehaviour
     }
 
     //Method to Return Clicked Object
-    GameObject ReturnClickedObject(out RaycastHit hit)
+    GameObject ReturnClickedObject(out RaycastHit hit, bool onlyTerrain)
     {
         GameObject target = null;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray.origin, ray.direction * 10, out hit))
+
+        if(onlyTerrain)
         {
-            target = hit.collider.gameObject;
+            if (Physics.Raycast(ray.origin, ray.direction * 10, out hit, 1000, 1 << LayerMask.NameToLayer("Terrain")))
+            {
+                target = hit.collider.gameObject;
+            }
         }
+        else
+        {
+            if (Physics.Raycast(ray.origin, ray.direction * 10, out hit))
+            {
+                target = hit.collider.gameObject;
+            }
+        }
+        
         return target;
     }
 
