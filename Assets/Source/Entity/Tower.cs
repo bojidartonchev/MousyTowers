@@ -16,6 +16,7 @@ public class Tower : NetworkBehaviour {
 
     public GameObject m_selfEffectSpawnPossition;
     public GameObject m_targetEffectSpawnPossition;
+    public GameObject m_unitSpawnPossition;
 
     private float tickPeriod = 0.0f;
 
@@ -47,7 +48,11 @@ public class Tower : NetworkBehaviour {
                         m_units++;
 
                         // Istantiate prefabs from server
-                        var hordeUnit = Instantiate(m_HordeUnitPrefab);
+                        // Istantiate prefabs from server
+                        var hordeUnit = Instantiate(m_HordeUnitPrefab, m_unitSpawnPossition.transform);
+                        hordeUnit.transform.parent = m_unitSpawnPossition.transform;
+                        hordeUnit.transform.localPosition = Vector3.zero;
+                        hordeUnit.GetComponent<Unit>().parentNetId = m_unitSpawnPossition.GetComponent<TowerSpawnPosition>().netId;
 
                         // Assign parrent
                         hordeUnit.GetComponent<Unit>().parentNetId = this.netId;
