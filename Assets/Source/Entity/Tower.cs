@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class Tower : NetworkBehaviour {
 
@@ -16,6 +17,7 @@ public class Tower : NetworkBehaviour {
 
     public GameObject m_selfEffectSpawnPossition;
     public GameObject m_targetEffectSpawnPossition;
+    public Text m_counterText;
 
     private float tickPeriod = 0.0f;
 
@@ -70,7 +72,9 @@ public class Tower : NetworkBehaviour {
                     OnColorChange(c);
                 }
             }
-        }        
+        }
+
+        m_counterText.text = m_units.ToString();
     }
 
     public bool IsOccupied()
