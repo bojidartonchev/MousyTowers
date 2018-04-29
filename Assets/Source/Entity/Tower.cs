@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class Tower : NetworkBehaviour {
 
@@ -16,6 +17,7 @@ public class Tower : NetworkBehaviour {
 
     public GameObject m_selfEffectSpawnPossition;
     public GameObject m_targetEffectSpawnPossition;
+    public Text m_counterText;
 
     private float tickPeriod = 0.0f;
 
@@ -24,6 +26,8 @@ public class Tower : NetworkBehaviour {
 
     [SyncVar(hook = "OnColorChange")]
     private Color m_color = Color.clear;
+
+    private Dictionary<HordeLeader, Unit[]> m_availableUnits;
 
     // Use this for initialization
     void Start () {
@@ -70,7 +74,9 @@ public class Tower : NetworkBehaviour {
                     OnColorChange(c);
                 }
             }
-        }        
+        }
+
+        m_counterText.text = m_units.ToString();
     }
 
     public bool IsOccupied()
@@ -175,5 +181,35 @@ public class Tower : NetworkBehaviour {
         var materialColored = new Material(Shader.Find("Diffuse"));
         materialColored.color = m_color;
         this.GetComponent<Renderer>().material = materialColored;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("Leader"))
+        {
+            var leader = other.gameObject.GetComponent<HordeLeader>();
+            if(leader)
+            {
+                if(!m_availableUnits.ContainsKey(leader))
+                {
+                    m_availableUnits.Add(leader, leader.GetHorde().GetUnits());
+                }
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Leader"))
+        {
+            var leader = other.gameObject.GetComponent<HordeLeader>();
+            if (leader)
+            {
+                if (m_availableUnits.ContainsKey(leader))
+                {
+                    m_availableUnits.Remove(leader);
+                }
+            }
+        }
     }
 }
