@@ -55,8 +55,8 @@ PlayerSettings:
   iosAppInBackgroundBehavior: 0
   displayResolutionDialog: 1
   iosAllowHTTPDownload: 1
-  allowedAutorotateToPortrait: 0
-  allowedAutorotateToPortraitUpsideDown: 0
+  allowedAutorotateToPortrait: 1
+  allowedAutorotateToPortraitUpsideDown: 1
   allowedAutorotateToLandscapeRight: 1
   allowedAutorotateToLandscapeLeft: 1
   useOSAutorotation: 1
@@ -611,12 +611,12 @@ PlayerSettings:
     Collab: 0
     ErrorHub: 0
     Hub: 0
-    UNet: 1
+    UNet: 0
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
-  cloudProjectId: c16dc498-a4d0-491c-a0ae-2b0125bc1fe8
+  cloudProjectId: 5277a755-7752-4d44-bf81-59d0123e6dd2
   projectName: Gamejam
-  organizationId: tricktalegames
+  organizationId: bojidar-tonchev
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0
