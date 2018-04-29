@@ -11,8 +11,11 @@ public class Tower : NetworkBehaviour {
     public Team m_occupator;
 
     public GameObject m_HordePrefab;
-    public GameObject m_HordeLeaderPrefab;
-    public GameObject m_HordeUnitPrefab;
+    public GameObject m_HordeLeaderPrefabAngel;
+    public GameObject m_HordeUnitPrefabAngel;
+
+    public GameObject m_HordeLeaderPrefabDemon;
+    public GameObject m_HordeUnitPrefabDemon;
 
     public GameObject m_selfEffectSpawnPossition;
     public GameObject m_targetEffectSpawnPossition;
@@ -59,11 +62,11 @@ public class Tower : NetworkBehaviour {
             {
                 if (m_isATeamPresent)
                 {
-                    Occupy((Team)0);
+                    Occupy((Team)1);
                 }
                 else if (m_isBTeamPresent)
                 {
-                    Occupy((Team)1);
+                    Occupy((Team)2);
                 }
             }
 
@@ -79,7 +82,14 @@ public class Tower : NetworkBehaviour {
                         m_units++;
 
                         // Istantiate prefabs from server
-                        var hordeUnit = Instantiate(m_HordeUnitPrefab, m_unitSpawnPossition.transform.position, m_unitSpawnPossition.transform.rotation);
+                        GameObject hordeUnit;
+                        if ((int)m_occupator == 1)
+                        {
+                            hordeUnit = Instantiate(m_HordeUnitPrefabAngel, m_unitSpawnPossition.transform.position, m_unitSpawnPossition.transform.rotation);
+                        } else
+                        {
+                            hordeUnit = Instantiate(m_HordeUnitPrefabDemon, m_unitSpawnPossition.transform.position, m_unitSpawnPossition.transform.rotation);
+                        }
 
                         // Assign parrent
                         hordeUnit.GetComponent<Unit>().parentNetId = this.netId;
@@ -122,7 +132,7 @@ public class Tower : NetworkBehaviour {
 
     public void MoveUnits(Tower target)
     {
-        if(target)
+        if (target)
         {
             CmdInitMoveUnits(target.netId);
         }
@@ -137,11 +147,11 @@ public class Tower : NetworkBehaviour {
     {
         foreach (var kvp in m_availableUnits)
         {
-            if (kvp.Key.GetHorde().GetTeam() == (Team)0)
+            if (kvp.Key.GetHorde().GetTeam() == (Team)1)
             {
                 m_isATeamPresent = true;
             }
-            else if (kvp.Key.GetHorde().GetTeam() == (Team)1)
+            else if (kvp.Key.GetHorde().GetTeam() == (Team)2)
             {
                 m_isBTeamPresent = true;
             }
@@ -153,7 +163,6 @@ public class Tower : NetworkBehaviour {
     private void CmdInitMoveUnits(NetworkInstanceId targetId)
     {
         var target = GameController.Instance.GetTowerByNetworkId(targetId);
-
         if (target)
         {
             var hordeCount = Math.Min(target.m_limit, m_units / 2);
@@ -165,8 +174,14 @@ public class Tower : NetworkBehaviour {
             var horde = hordeInstance.GetComponent<Horde>();
             horde.team = m_occupator; 
             NetworkServer.Spawn(hordeInstance);
-
-            var hordeLeaderInstance = Instantiate(m_HordeLeaderPrefab, m_unitSpawnPossition.transform.position, m_unitSpawnPossition.transform.rotation);
+            GameObject hordeLeaderInstance;
+            if ((int)m_occupator == 1)
+            {
+                hordeLeaderInstance = Instantiate(m_HordeLeaderPrefabAngel, m_unitSpawnPossition.transform.position, m_unitSpawnPossition.transform.rotation);
+            } else
+            {
+                hordeLeaderInstance = Instantiate(m_HordeLeaderPrefabDemon, m_unitSpawnPossition.transform.position, m_unitSpawnPossition.transform.rotation);
+            }
             hordeLeaderInstance.GetComponent<HordeLeader>().parentNetId = hordeInstance.GetComponent<Horde>().netId;
             NetworkServer.Spawn(hordeLeaderInstance);
 
