@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44778484, g: 0.49776602, b: 0.5754254, a: 1}
+  m_IndirectSpecularColor: {r: 0.44778544, g: 0.49776703, b: 0.5754261, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -88,6 +88,7 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
+    m_ShowResolutionOverlay: 1
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -336,6 +337,7 @@ GameObject:
   - component: {fileID: 375874855}
   - component: {fileID: 375874857}
   - component: {fileID: 375874856}
+  - component: {fileID: 375874858}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Tower
@@ -463,6 +465,18 @@ MonoBehaviour:
     i15: 0
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!65 &375874858
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 375874851}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.86, y: 0.77, z: 3.23}
+  m_Center: {x: -0.00000011920929, y: -0.15, z: 0.0000009536743}
 --- !u!1 &808687369
 GameObject:
   m_ObjectHideFlags: 0
@@ -527,6 +541,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -727,9 +742,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Convex: 0
-  m_InflateMesh: 0
+  m_CookingOptions: 14
   m_SkinWidth: 0.01
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!33 &1061151063
@@ -852,6 +867,7 @@ GameObject:
   - component: {fileID: 1218409893}
   - component: {fileID: 1218409895}
   - component: {fileID: 1218409894}
+  - component: {fileID: 1218409896}
   m_Layer: 0
   m_Name: Tower (1)
   m_TagString: Tower
@@ -994,6 +1010,18 @@ MonoBehaviour:
     i15: 0
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!65 &1218409896
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1218409888}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.86, y: 0.77, z: 3.23}
+  m_Center: {x: -0.00000011920929, y: -0.15, z: 0.0000009536743}
 --- !u!1 &1353479356
 GameObject:
   m_ObjectHideFlags: 0
@@ -1038,6 +1066,7 @@ GameObject:
   - component: {fileID: 1992908557}
   - component: {fileID: 1992908559}
   - component: {fileID: 1992908558}
+  - component: {fileID: 1992908560}
   m_Layer: 0
   m_Name: Tower (2)
   m_TagString: Tower
@@ -1165,6 +1194,18 @@ MonoBehaviour:
     i15: 0
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 0
+--- !u!65 &1992908560
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1992908553}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.86, y: 0.77, z: 3.23}
+  m_Center: {x: -0.00000011920929, y: -0.15, z: 0.0000009536743}
 --- !u!1 &2112270215
 GameObject:
   m_ObjectHideFlags: 0
