@@ -11,6 +11,12 @@ public class DragDropController : MonoBehaviour
     Vector3 offsetValue;
     Vector3 positionOfScreen;
 
+    bool isDragingSpell;
+    SpellType spellType;
+
+    public GameObject m_projector;
+    public Material m_projectorMat;
+
     // Use this for initialization
     void Start()
     {
@@ -23,7 +29,7 @@ public class DragDropController : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hitInfo;
-            m_source = ReturnClickedObject(out hitInfo);
+            m_source = ReturnClickedObject(out hitInfo, false);
             if (m_source != null && m_source.tag == "Tower")
             {
                 var sourceTower = m_source.GetComponent<Tower>();
@@ -42,45 +48,152 @@ public class DragDropController : MonoBehaviour
         {
             isMouseDragging = false;
 
-            RaycastHit hitInfo;
-            m_target = ReturnClickedObject(out hitInfo);
-            if (m_target != null && m_target.tag == "Tower")
+            // remove ground circle
+            //m_groundRenderer.material.SetFloat("_Radius", 0f);
+            //m_groundRenderer.material.SetFloat("_Border", 0f);
+            if(m_projector)
             {
-                var targetTower = m_target.GetComponent<Tower>();
-                var sourceTower = m_source.GetComponent<Tower>();
+                m_projector.SetActive(false);
+            }
 
-                if(targetTower && sourceTower && targetTower!=sourceTower)
+            RaycastHit hitInfo;
+            m_target = ReturnClickedObject(out hitInfo, false);
+
+            if (isDragingSpell)
+            {
+                isDragingSpell = false;
+
+                Vector3 targetPoss = new Vector3();
+
+                if(spellType == SpellType.ClearTower || spellType == SpellType.ProtectTower)
                 {
-                    sourceTower.MoveUnits(targetTower);
+                    if (m_target != null && m_target.tag == "Tower")
+                    {
+                        var targetTower = m_target.GetComponent<Tower>();
+
+                        if (!targetTower || !(targetTower.m_occupator == GameController.Instance.GetCurrentTeam()))
+                        {
+                            return;
+                        }
+
+                        targetPoss = targetTower.m_selfEffectSpawnPossition.transform.position;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                else
+                {
+                    targetPoss = hitInfo.point;
+                }
+
+                // lauchn spell
+                var player = GameController.Instance.GetCurrentPlayer();
+                if (player)
+                {
+                    player.CmdExecuteSpell(spellType, targetPoss);
                 }
             }
+            else
+            {
+                if (m_target != null && m_target.tag == "Tower")
+                {
+                    var targetTower = m_target.GetComponent<Tower>();
+                    var sourceTower = m_source.GetComponent<Tower>();
+
+                    if (targetTower && sourceTower && targetTower != sourceTower)
+                    {
+                        sourceTower.MoveUnits(targetTower);
+                    }
+                }
+            }            
         }
 
         //Is mouse Moving
         if (isMouseDragging)
         {
-            //tracking mouse position.
-            Vector3 currentScreenSpace = new Vector3(Input.mousePosition.x, Input.mousePosition.y, positionOfScreen.z);
+            RaycastHit projectorHitInfo;
+            ReturnClickedObject(out projectorHitInfo, true);
 
-            //converting screen position to world position with offset changes.
-            Vector3 currentPosition = Camera.main.ScreenToWorldPoint(currentScreenSpace) + offsetValue;
+            RaycastHit hitInfo;
+            var tempTarget = ReturnClickedObject(out hitInfo, false);
 
-            //It will update target gameobject's current postion.
-            //getTarget.transform.position = currentPosition;
+            var color = Color.red;            
+
+            if (isDragingSpell)
+            {
+                if(spellType == SpellType.ClearTower || spellType == SpellType.ProtectTower)
+                {
+                    // make circle green if acceptable target selected
+                    if (tempTarget != null && tempTarget.tag == "Tower")
+                    {
+                        var sourceTower = tempTarget.GetComponent<Tower>();
+                        if (sourceTower && sourceTower.m_occupator == GameController.Instance.GetCurrentTeam())
+                        {
+                            // make green
+                            color = Color.green;
+                        }
+                    }
+                }
+                else
+                {
+                    color = Color.green;
+                }                
+            }
+            else
+            {
+                // draging units
+
+                // make circle green if acceptable target selected
+                if (tempTarget != null && tempTarget.tag == "Tower")
+                {
+                    var tower = tempTarget.GetComponent<Tower>();
+                    if (tower)
+                    {
+                        // make green
+                        color = Color.green;
+                    }
+                }
+            }
+
+            if (m_projector)
+            {
+                m_projector.SetActive(true);
+                m_projector.transform.position = new Vector3(projectorHitInfo.point.x, m_projector.transform.position.y, projectorHitInfo.point.z);
+                m_projectorMat.SetColor("_Color", color);
+            }
         }
+    }
 
-
+    public void StartSpellDrag(SpellType t)
+    {
+        isMouseDragging = true;
+        isDragingSpell = true;
+        spellType = t;
     }
 
     //Method to Return Clicked Object
-    GameObject ReturnClickedObject(out RaycastHit hit)
+    GameObject ReturnClickedObject(out RaycastHit hit, bool onlyTerrain)
     {
         GameObject target = null;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray.origin, ray.direction * 10, out hit))
+
+        if(onlyTerrain)
         {
-            target = hit.collider.gameObject;
+            if (Physics.Raycast(ray.origin, ray.direction * 10, out hit, 1000, 1 << LayerMask.NameToLayer("Terrain")))
+            {
+                target = hit.collider.gameObject;
+            }
         }
+        else
+        {
+            if (Physics.Raycast(ray.origin, ray.direction * 10, out hit))
+            {
+                target = hit.collider.gameObject;
+            }
+        }
+        
         return target;
     }
 

@@ -3,22 +3,19 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace Prototype.NetworkLobby
+public class EventSystemChecker : MonoBehaviour
 {
-    public class EventSystemChecker : MonoBehaviour
-    {
-        //public GameObject eventSystem;
+    //public GameObject eventSystem;
 
-        // Use this for initialization
-        void Awake()
+	// Use this for initialization
+	void Awake ()
+	{
+	    if(!FindObjectOfType<EventSystem>())
         {
-            if (!FindObjectOfType<EventSystem>())
-            {
-                //Instantiate(eventSystem);
-                GameObject obj = new GameObject("EventSystem");
-                obj.AddComponent<EventSystem>();
-                obj.AddComponent<StandaloneInputModule>().forceModuleActive = true;
-            }
+           //Instantiate(eventSystem);
+            GameObject obj = new GameObject("EventSystem");
+            obj.AddComponent<EventSystem>();
+            obj.AddComponent<StandaloneInputModule>().forceModuleActive = true;
         }
-    }
+	}
 }
