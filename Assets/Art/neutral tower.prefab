@@ -36,9 +36,12 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4077744129793448}
+  - component: {fileID: 114874387390416120}
+  - component: {fileID: 114469968542210368}
+  - component: {fileID: 136967949454094048}
   m_Layer: 8
   m_Name: neutral tower
-  m_TagString: Untagged
+  m_TagString: Tower
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -111,3 +114,70 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1103327615046952}
   m_Mesh: {fileID: 4300000, guid: 83ee4062804b3294e853b2c950795fd4, type: 3}
+--- !u!114 &114469968542210368
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1154665560768412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 917e0ca029bfb5c4a86eab6e689f5de4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_limit: 100
+  m_isStartTower: 0
+  m_occupator: 0
+  m_HordePrefab: {fileID: 1205523589438896, guid: d3bb37e02e8ba0044bfa0b6ff9b7fd61,
+    type: 2}
+  m_HordeLeaderPrefab: {fileID: 1145031739843670, guid: e6816ac5ff47bee4f9849dfa92e5497d,
+    type: 2}
+  m_HordeUnitPrefab: {fileID: 1749741923649380, guid: 5be744eeed8158444b0358d5f5db68e3,
+    type: 2}
+  m_selfEffectSpawnPossition: {fileID: 1154665560768412}
+  m_targetEffectSpawnPossition: {fileID: 1103327615046952}
+--- !u!114 &114874387390416120
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1154665560768412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 38
+    i1: 105
+    i2: 70
+    i3: 83
+    i4: 111
+    i5: 97
+    i6: 80
+    i7: 212
+    i8: 219
+    i9: 138
+    i10: 11
+    i11: 207
+    i12: 223
+    i13: 20
+    i14: 241
+    i15: 117
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 0
+--- !u!136 &136967949454094048
+CapsuleCollider:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1154665560768412}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 81
+  m_Height: 302.8
+  m_Direction: 1
+  m_Center: {x: 0, y: 114.1, z: 0}

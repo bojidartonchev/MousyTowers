@@ -61,6 +61,8 @@ public class DragDropController : MonoBehaviour
 
             if (isDragingSpell)
             {
+                isDragingSpell = false;
+
                 Vector3 targetPoss = new Vector3();
 
                 if(spellType == SpellType.ClearTower || spellType == SpellType.ProtectTower)
@@ -85,8 +87,6 @@ public class DragDropController : MonoBehaviour
                 {
                     targetPoss = hitInfo.point;
                 }
-
-                isDragingSpell = false;
 
                 // lauchn spell
                 var player = GameController.Instance.GetCurrentPlayer();
